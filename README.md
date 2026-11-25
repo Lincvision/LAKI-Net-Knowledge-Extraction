@@ -1,6 +1,6 @@
 # LAKI-Net image-conditioned knowledge
 
-This repository contains the knowledge used by LAKI-Net for remote sensing segmentation. Each of the **2,678 source patches** has a structured observation record and a matching 17-node factor graph. All crops from a patch share that record. The extraction models included `gpt-5.6-sol` and `gpt-6-astra`. [Verified extraction examples](metadata/verified_model_examples.json)
+This repository contains the knowledge used by LAKI-Net for remote sensing segmentation. Each of the **2,678 source patches** has a structured observation record and a matching 17-node factor graph. All crops from a patch share that record. The extraction model included `gpt-5.6-sol`. [Verified extraction examples](metadata/verified_model_examples.json)
 
 **Start with one patch.** The LoveDA example shows how a model can report a tree and a hard surface in the same image without asserting that one occludes the other. [Read the worked example](examples/README.md)
 
