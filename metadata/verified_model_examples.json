@@ -52,32 +52,6 @@
     "acting_model": "gpt-5.6-sol",
     "write_time_utc": "2026-09-07T13:55:28.998Z",
     "check": "All six decoded payload fields match the record used for segmentation."
-  },
-  {
-    "dataset": "LoveDA",
-    "split": "Train",
-    "id": "Rural/470",
-    "source_sha256": "e4b548a6b5320d0f02f4eb85c8771f2f147f40adea7c0becdbf9b851d9af647b",
-    "acting_model": "gpt-6-astra",
-    "write_time_utc": "2026-09-13T06:04:59.309Z",
-    "check": "All six decoded payload fields match the record used for segmentation."
-  },
-  {
-    "dataset": "LoveDA",
-    "split": "Train",
-    "id": "Rural/473",
-    "source_sha256": "5883cac7bf224786cd10b094b7be494d3509036b045c9a586b154a1c1957d30d",
-    "acting_model": "gpt-6-astra",
-    "write_time_utc": "2026-09-13T06:06:39.541Z",
-    "check": "All six decoded payload fields match the record used for segmentation."
-  },
-  {
-    "dataset": "LoveDA",
-    "split": "Train",
-    "id": "Rural/476",
-    "source_sha256": "36aa9a0517ace8163b3693ebaed491a41fd5df4834b782d579032e7dc058495f",
-    "acting_model": "gpt-6-astra",
-    "write_time_utc": "2026-09-13T06:13:56.648Z",
-    "check": "All six decoded payload fields match the record used for segmentation."
   }
+
 ]
