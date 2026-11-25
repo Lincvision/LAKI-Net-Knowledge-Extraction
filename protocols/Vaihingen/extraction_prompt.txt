@@ -1,0 +1,56 @@
+Extract structured physical observations from one Vaihingen_RSP false-color aerial patch at a time.
+
+The inputs are CURRENT_IMAGE and IMAGE_ID. Inspect only the original 1024 x 1024 three-channel IRRG image specified by CURRENT_IMAGE. The channels are NIR, red and green, in that order. Near-infrared is displayed in the red channel.
+
+Vaihingen interpretation rules
+1. Vegetation often appears red or magenta because of its near-infrared response. This is a false-color display. A strong near-infrared response can support the presence of vegetation. On its own it does not distinguish trees from low vegetation or establish that a structure is elevated.
+2. Distinguish elevated_porous from ground_vegetation using porous canopy texture, branching, the fineness of the surface texture, shadows and direct evidence of occlusion. Red intensity alone is insufficient.
+3. Buildings and hard ground surfaces may appear gray, bluish gray, brown or dark. Distinguish roofs from open ground using closed contours, consistent roof surfaces, cast shadows from elevated structures and the continuity of open surfaces. Color alone is insufficient.
+4. Pitched roofs, narrow streets, courtyards, occlusion by tree crowns and strong shadows in dense urban areas can limit visibility. When the view is unclear, use unknown or partial in the appropriate field. Do not fill gaps from general knowledge of the scene.
+5. The original large images were reflection-padded before being cut into patches. Mirrored or repeated textures may appear near the bottom or right boundary. Record these effects under boundary_truncation or orthophoto_distortion as appropriate. Do not use repetition caused by padding as evidence of a vehicle group, an object count or a relation.
+
+Extraction rules
+1. Do not open, read, search for or infer masks_png, masks, labels, annotations, ground truth, evaluation results or neighboring images.
+2. Do not infer the content of the current image from its filename, dataset split, geographic ID, a previously viewed image or dataset frequencies.
+3. Do not output coordinates, bounding boxes, exact counts, area fractions, pixel locations, additional roles, additional cues, additional relations or free-form scene descriptions.
+4. Adjacency alone does not establish a relation. Assign observed only when there is direct visual evidence in the current IRRG image.
+5. unknown is a valid output. When the evidence is unclear, abstain. Do not fill gaps with general knowledge.
+6. Return exactly the five roles, eight evidence cues and four relations R1–R4 specified in the protocol. Preserve the key names, relation endpoints and relation types.
+7. Return only valid JSON. Omit Markdown, explanations and reasoning.
+
+Fixed physical roles
+- elevated_porous: A structure that appears elevated and shows a porous canopy or branching pattern, typically a tree. A red near-infrared response or a shadow alone is insufficient evidence for this role.
+- ground_vegetation: Fine-textured vegetation close to the ground that forms a continuous or locally continuous surface, typically low vegetation.
+- elevated_closed_rigid: An elevated rigid structure with a largely closed outline and an internally consistent surface, typically a building.
+- open_hard_surface: A continuous hard surface extending across open ground, typically a road, walkway or paved area. Exclude roofs.
+- small_rigid_group: At least two separate, compact, small rigid objects of similar size, typically a group of vehicles. Exclude repeated rooftop fixtures and features duplicated by reflection padding.
+
+Fixed visual cues
+- porous_crown_texture: A porous, fine-grained texture organized into a recognizable crown.
+- branching_structure: An identifiable trunk, branches or a forked canopy framework.
+- elevated_cast_shadow: A coherent cast shadow attributable to an elevated structure. Exclude dark areas of uncertain origin.
+- continuous_fine_vegetation_texture: A continuous, fine-grained vegetation texture close to the ground.
+- closed_rigid_contour: A largely closed outline around a rigid region.
+- roof_surface_consistency: A consistent roof plane, tiling pattern or roof construction feature within a region.
+- open_hard_surface_continuity: A hard ground surface that extends continuously across open space.
+- repeated_small_rigid_shapes: At least two small rigid objects of similar size and shape. Exclude repeated rooftop fixtures and reflections caused by boundary padding.
+
+Fixed relations
+- R1 elevated_porous --occlusion_evidence--> ground_vegetation
+- R2 elevated_porous --occlusion_evidence--> open_hard_surface
+- R3 elevated_closed_rigid --interrupts_continuity--> open_hard_surface
+- R4 small_rigid_group --projected_on--> open_hard_surface
+
+Consistency rules
+- If elevated_porous=present, at least one of porous_crown_texture and branching_structure must be present. elevated_cast_shadow alone is insufficient.
+- If ground_vegetation=present, continuous_fine_vegetation_texture must be present.
+- If elevated_closed_rigid=present, at least one of closed_rigid_contour and roof_surface_consistency must be present.
+- If open_hard_surface=present, open_hard_surface_continuity must be present.
+- If small_rigid_group=present, repeated_small_rigid_shapes must be present.
+- If either relation endpoint is absent, set the relation's state=not_applicable and observability=not_applicable.
+- If neither endpoint is absent and at least one is unknown, set the relation's state=unknown.
+- Both observed and not_observed require both endpoints to be present. Co-occurrence alone does not justify observed.
+- If an evidence cue has state=not_applicable, its observability must be not_applicable.
+- If a role has presence=absent, its organization must be not_applicable.
+
+Use protocol_snapshot.json and annotation_payload.schema.json in this directory as the sole specifications for allowed values, required fields and relation signatures. Before returning the JSON, check its syntax, enum values and consistency with the rules above. Omit the validation steps from the response.

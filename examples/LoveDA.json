@@ -1,0 +1,381 @@
+{
+  "dataset": "LoveDA",
+  "split": "Train",
+  "id": "Rural/470",
+  "input_sha256": "e4b548a6b5320d0f02f4eb85c8771f2f147f40adea7c0becdbf9b851d9af647b",
+  "payload": {
+    "roles": {
+      "elevated_porous": {
+        "presence": "present",
+        "organization": "clustered",
+        "visibility": "clear"
+      },
+      "ground_vegetation": {
+        "presence": "present",
+        "organization": "fragmented",
+        "visibility": "clear"
+      },
+      "elevated_closed_rigid": {
+        "presence": "unknown",
+        "organization": "unknown",
+        "visibility": "poor"
+      },
+      "open_hard_surface": {
+        "presence": "present",
+        "organization": "continuous",
+        "visibility": "clear"
+      },
+      "small_rigid_group": {
+        "presence": "absent",
+        "organization": "not_applicable",
+        "visibility": "clear"
+      }
+    },
+    "evidence": {
+      "porous_crown_texture": {
+        "state": "present",
+        "observability": "clear"
+      },
+      "branching_structure": {
+        "state": "unknown",
+        "observability": "poor"
+      },
+      "elevated_cast_shadow": {
+        "state": "present",
+        "observability": "partial"
+      },
+      "continuous_fine_vegetation_texture": {
+        "state": "present",
+        "observability": "clear"
+      },
+      "closed_rigid_contour": {
+        "state": "unknown",
+        "observability": "poor"
+      },
+      "roof_surface_consistency": {
+        "state": "unknown",
+        "observability": "poor"
+      },
+      "open_hard_surface_continuity": {
+        "state": "present",
+        "observability": "clear"
+      },
+      "repeated_small_rigid_shapes": {
+        "state": "absent",
+        "observability": "clear"
+      }
+    },
+    "relations": [
+      {
+        "relation_id": "R1",
+        "source_role": "elevated_porous",
+        "relation_type": "occlusion_evidence",
+        "target_role": "ground_vegetation",
+        "state": "observed",
+        "observability": "partial"
+      },
+      {
+        "relation_id": "R2",
+        "source_role": "elevated_porous",
+        "relation_type": "occlusion_evidence",
+        "target_role": "open_hard_surface",
+        "state": "not_observed",
+        "observability": "partial"
+      },
+      {
+        "relation_id": "R3",
+        "source_role": "elevated_closed_rigid",
+        "relation_type": "interrupts_continuity",
+        "target_role": "open_hard_surface",
+        "state": "unknown",
+        "observability": "poor"
+      },
+      {
+        "relation_id": "R4",
+        "source_role": "small_rigid_group",
+        "relation_type": "projected_on",
+        "target_role": "open_hard_surface",
+        "state": "not_applicable",
+        "observability": "not_applicable"
+      }
+    ],
+    "graph_status": "partial",
+    "quality_flags": {
+      "boundary_truncation": "strong",
+      "shadow_interference": "mild",
+      "orthophoto_distortion": "none"
+    },
+    "image_id": "470"
+  },
+  "graph": {
+    "graph_type": "coordinate_free_physical_evidence_factor_graph",
+    "schema_version": "loveda_cpeg_v1",
+    "image_id": "470",
+    "nodes": [
+      {
+        "node_id": "role::elevated_porous",
+        "node_type": "physical_role",
+        "role": "elevated_porous",
+        "presence": "present",
+        "organization": "clustered",
+        "visibility": "clear",
+        "message_mask": true
+      },
+      {
+        "node_id": "role::ground_vegetation",
+        "node_type": "physical_role",
+        "role": "ground_vegetation",
+        "presence": "present",
+        "organization": "fragmented",
+        "visibility": "clear",
+        "message_mask": true
+      },
+      {
+        "node_id": "role::elevated_closed_rigid",
+        "node_type": "physical_role",
+        "role": "elevated_closed_rigid",
+        "presence": "unknown",
+        "organization": "unknown",
+        "visibility": "poor",
+        "message_mask": true
+      },
+      {
+        "node_id": "role::open_hard_surface",
+        "node_type": "physical_role",
+        "role": "open_hard_surface",
+        "presence": "present",
+        "organization": "continuous",
+        "visibility": "clear",
+        "message_mask": true
+      },
+      {
+        "node_id": "role::small_rigid_group",
+        "node_type": "physical_role",
+        "role": "small_rigid_group",
+        "presence": "absent",
+        "organization": "not_applicable",
+        "visibility": "clear",
+        "message_mask": false
+      },
+      {
+        "node_id": "evidence::porous_crown_texture",
+        "node_type": "evidence_factor",
+        "predicate": "porous_crown_texture",
+        "state": "present",
+        "observability": "clear",
+        "message_mask": true
+      },
+      {
+        "node_id": "evidence::branching_structure",
+        "node_type": "evidence_factor",
+        "predicate": "branching_structure",
+        "state": "unknown",
+        "observability": "poor",
+        "message_mask": false
+      },
+      {
+        "node_id": "evidence::elevated_cast_shadow",
+        "node_type": "evidence_factor",
+        "predicate": "elevated_cast_shadow",
+        "state": "present",
+        "observability": "partial",
+        "message_mask": true
+      },
+      {
+        "node_id": "evidence::continuous_fine_vegetation_texture",
+        "node_type": "evidence_factor",
+        "predicate": "continuous_fine_vegetation_texture",
+        "state": "present",
+        "observability": "clear",
+        "message_mask": true
+      },
+      {
+        "node_id": "evidence::closed_rigid_contour",
+        "node_type": "evidence_factor",
+        "predicate": "closed_rigid_contour",
+        "state": "unknown",
+        "observability": "poor",
+        "message_mask": false
+      },
+      {
+        "node_id": "evidence::roof_surface_consistency",
+        "node_type": "evidence_factor",
+        "predicate": "roof_surface_consistency",
+        "state": "unknown",
+        "observability": "poor",
+        "message_mask": false
+      },
+      {
+        "node_id": "evidence::open_hard_surface_continuity",
+        "node_type": "evidence_factor",
+        "predicate": "open_hard_surface_continuity",
+        "state": "present",
+        "observability": "clear",
+        "message_mask": true
+      },
+      {
+        "node_id": "evidence::repeated_small_rigid_shapes",
+        "node_type": "evidence_factor",
+        "predicate": "repeated_small_rigid_shapes",
+        "state": "absent",
+        "observability": "clear",
+        "message_mask": true
+      },
+      {
+        "node_id": "relation::R1",
+        "node_type": "relation_factor",
+        "relation_id": "R1",
+        "source_role": "elevated_porous",
+        "relation_type": "occlusion_evidence",
+        "target_role": "ground_vegetation",
+        "state": "observed",
+        "observability": "partial",
+        "message_mask": true
+      },
+      {
+        "node_id": "relation::R2",
+        "node_type": "relation_factor",
+        "relation_id": "R2",
+        "source_role": "elevated_porous",
+        "relation_type": "occlusion_evidence",
+        "target_role": "open_hard_surface",
+        "state": "not_observed",
+        "observability": "partial",
+        "message_mask": false
+      },
+      {
+        "node_id": "relation::R3",
+        "node_type": "relation_factor",
+        "relation_id": "R3",
+        "source_role": "elevated_closed_rigid",
+        "relation_type": "interrupts_continuity",
+        "target_role": "open_hard_surface",
+        "state": "unknown",
+        "observability": "poor",
+        "message_mask": false
+      },
+      {
+        "node_id": "relation::R4",
+        "node_type": "relation_factor",
+        "relation_id": "R4",
+        "source_role": "small_rigid_group",
+        "relation_type": "projected_on",
+        "target_role": "open_hard_surface",
+        "state": "not_applicable",
+        "observability": "not_applicable",
+        "message_mask": false
+      }
+    ],
+    "edges": [
+      {
+        "source": "evidence::porous_crown_texture",
+        "target": "role::elevated_porous",
+        "edge_type": "observes",
+        "evidence_state": "present"
+      },
+      {
+        "source": "evidence::branching_structure",
+        "target": "role::elevated_porous",
+        "edge_type": "observes",
+        "evidence_state": "unknown"
+      },
+      {
+        "source": "evidence::elevated_cast_shadow",
+        "target": "role::elevated_porous",
+        "edge_type": "observes",
+        "evidence_state": "present"
+      },
+      {
+        "source": "evidence::elevated_cast_shadow",
+        "target": "role::elevated_closed_rigid",
+        "edge_type": "observes",
+        "evidence_state": "present"
+      },
+      {
+        "source": "evidence::continuous_fine_vegetation_texture",
+        "target": "role::ground_vegetation",
+        "edge_type": "observes",
+        "evidence_state": "present"
+      },
+      {
+        "source": "evidence::closed_rigid_contour",
+        "target": "role::elevated_closed_rigid",
+        "edge_type": "observes",
+        "evidence_state": "unknown"
+      },
+      {
+        "source": "evidence::roof_surface_consistency",
+        "target": "role::elevated_closed_rigid",
+        "edge_type": "observes",
+        "evidence_state": "unknown"
+      },
+      {
+        "source": "evidence::open_hard_surface_continuity",
+        "target": "role::open_hard_surface",
+        "edge_type": "observes",
+        "evidence_state": "present"
+      },
+      {
+        "source": "evidence::repeated_small_rigid_shapes",
+        "target": "role::small_rigid_group",
+        "edge_type": "observes",
+        "evidence_state": "absent"
+      },
+      {
+        "source": "role::elevated_porous",
+        "target": "relation::R1",
+        "edge_type": "relation_source",
+        "relation_state": "observed"
+      },
+      {
+        "source": "relation::R1",
+        "target": "role::ground_vegetation",
+        "edge_type": "relation_target",
+        "relation_state": "observed"
+      },
+      {
+        "source": "role::elevated_porous",
+        "target": "relation::R2",
+        "edge_type": "relation_source",
+        "relation_state": "not_observed"
+      },
+      {
+        "source": "relation::R2",
+        "target": "role::open_hard_surface",
+        "edge_type": "relation_target",
+        "relation_state": "not_observed"
+      },
+      {
+        "source": "role::elevated_closed_rigid",
+        "target": "relation::R3",
+        "edge_type": "relation_source",
+        "relation_state": "unknown"
+      },
+      {
+        "source": "relation::R3",
+        "target": "role::open_hard_surface",
+        "edge_type": "relation_target",
+        "relation_state": "unknown"
+      },
+      {
+        "source": "role::small_rigid_group",
+        "target": "relation::R4",
+        "edge_type": "relation_source",
+        "relation_state": "not_applicable"
+      },
+      {
+        "source": "relation::R4",
+        "target": "role::open_hard_surface",
+        "edge_type": "relation_target",
+        "relation_state": "not_applicable"
+      }
+    ],
+    "counts": {
+      "physical_role_nodes": 5,
+      "evidence_factor_nodes": 8,
+      "relation_factor_nodes": 4,
+      "total_nodes": 17,
+      "total_edges": 17
+    }
+  }
+}

@@ -1,0 +1,57 @@
+你正在执行 LoveDA 自然色 RGB 遥感影像的逐图结构化物理知识提取。
+本轮输入仅为 CURRENT_IMAGE 与 IMAGE_ID。只查看该路径指向的单张原始 1024×1024 RGB 图像，保持原始 RGB 通道，不拼图、不查看标签。
+LoveDA 专属解释规则：
+1. 使用自然色 RGB；不得沿用 Vaihingen 的 NIR-R-G 假彩色解释。植被颜色仅作辅助，不能单独证明植被存在、抬升或树草之分。
+2. Rural/Urban、数字文件名、划分、上张图、相邻图、类别频率均不是当前图像的证据；城乡身份仅存于 meta，不能进入模型语义字段。
+3. 树林、果园、农田可能混杂。树冠/枝杈支持 elevated_porous；贴地细粒度植被支持 ground_vegetation。裸土、翻耕地、收割后的田地、积水农田不能仅凭“农业”身份设为植被。
+4. 水体、裸地、背景、无数据区域没有新增物理角色；不得把水体或裸土硬塞进 open_hard_surface。只有明确铺装或硬质道路的开放连续性才支持它；灰色、平滑或带状本身不足以区分水、土、屋顶和地面。
+5. 在约 0.3 m 地面采样尺度下，小目标可能难以辨认。small_rigid_group 至少需要两个实际分离、尺度接近的小型刚体；不得把房屋组、屋顶设施、田垄、树列、反光噪声、纹理重复或镜像重复当作车辆组。
+6. 建筑屋顶与地面、塑料棚与亮裸土、树冠与作物、树影与暗水体应依轮廓、纹理、连续性、投影和直接遮挡判别；不清楚时用 unknown/partial/poor。
+7. 不预设此数据存在 Vaihingen 式反射填充；只有当前图像确有边界截断或正射畸变时填写相应质量标志。
+8. 五角色表达不覆盖全部七个地表类别；此限制是网络词汇兼容性的代价，不补造水体/裸土等节点。稀疏或 no_reliable_evidence 是合法完整输出。
+
+硬性约束：
+1. 禁止打开、读取、搜索或推断 masks_png、mask、label、annotation、ground truth、评价结果或相邻图像。
+2. 禁止根据文件名、数据划分、地理编号、上一张图或数据集频率推断当前内容。
+3. 禁止输出坐标、框、精确数量、面积比例、像素位置、新角色、新证据、新关系或自由场景描述。
+4. 不得把相邻误当成关系；只有当前 RGB 中存在直接视觉证据时才输出 observed。
+5. unknown 是正式且合格的输出；看不清时必须弃权，不能用常识补齐。
+6. 每次必须恰好输出协议规定的 5 个角色、8 项证据和 R1-R4 四条关系，键名、关系端点和类型不得变化。
+7. 最终只输出合法 JSON，不输出 Markdown、解释或分析过程。
+
+固定角色定义：
+- elevated_porous：具有抬升感和多孔冠层或枝杈结构，主要对应树木；绿色外观或阴影本身不能证明它存在。
+- ground_vegetation：贴地、连续或局部连续的细粒度植被表面，主要对应低矮植被。
+- elevated_closed_rigid：具有刚性、基本闭合轮廓和一致表面的抬升结构，主要对应建筑。
+- open_hard_surface：在地面层开放延展的连续硬质表面，主要对应道路、步道和铺装；屋顶不属于此角色。
+- small_rigid_group：至少两个尺度接近、相互分离、形状紧致的小型刚性目标，主要对应车辆组；屋顶设施或反射填充重复不能据重复外观归入此角色。
+
+固定证据定义：
+- porous_crown_texture：多孔、细碎且具有冠层组织的纹理。
+- branching_structure：可辨认的树干、枝杈或分叉式冠层骨架。
+- elevated_cast_shadow：能够归因于高起结构的连贯投影阴影；来源不明暗区不算。
+- continuous_fine_vegetation_texture：贴地连续的细粒度植被纹理。
+- closed_rigid_contour：围绕刚性区域的基本闭合轮廓。
+- roof_surface_consistency：区域内部一致的屋顶平面、瓦片或构造特征。
+- open_hard_surface_continuity：硬质地面在开放空间中的连续延展。
+- repeated_small_rigid_shapes：至少两个尺度和形态相近的小型刚体目标；重复屋顶设施和边界反射不算。
+
+固定关系：
+- R1 elevated_porous --occlusion_evidence--> ground_vegetation
+- R2 elevated_porous --occlusion_evidence--> open_hard_surface
+- R3 elevated_closed_rigid --interrupts_continuity--> open_hard_surface
+- R4 small_rigid_group --projected_on--> open_hard_surface
+
+一致性规则：
+- elevated_porous=present 时，porous_crown_texture 或 branching_structure 至少一项必须 present；elevated_cast_shadow 不能单独作为依据。
+- ground_vegetation=present 时，continuous_fine_vegetation_texture 必须 present。
+- elevated_closed_rigid=present 时，closed_rigid_contour 或 roof_surface_consistency 至少一项必须 present。
+- open_hard_surface=present 时，open_hard_surface_continuity 必须 present。
+- small_rigid_group=present 时，repeated_small_rigid_shapes 必须 present。
+- 任一关系端点 absent，则关系 state=not_applicable 且 observability=not_applicable。
+- 没有 absent、但任一端点 unknown，则关系 state=unknown。
+- observed 与 not_observed 均要求两个端点 present；共现本身不能推出 observed。
+- evidence state=not_applicable 时 observability 必须 not_applicable。
+- presence=absent 时 organization 必须 not_applicable。
+
+允许枚举和值、完整字段与关系签名以同目录 protocol_snapshot.json 和 schema/annotation_payload.schema.json 为唯一准则。输出前在内部检查 JSON、枚举和上述一致性，但不要输出检查过程。

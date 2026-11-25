@@ -1,0 +1,161 @@
+{
+  "schema_version": "loveda_cpeg_v1",
+  "dataset": "LoveDA",
+  "extraction_protocol": {
+    "modality": "RGB_only",
+    "channel_semantics": [
+      "R",
+      "G",
+      "B"
+    ],
+    "display_interpretation": "natural_color_rgb",
+    "input_unit": "one_original_1024x1024_patch",
+    "mask_viewed": false,
+    "multi_image_mosaic": false,
+    "free_form_graph_generation": false,
+    "exact_counts": false,
+    "coordinates": false,
+    "annotation_rule": "fixed_roles_fixed_evidence_fixed_relations_with_abstention"
+  },
+  "dataset_characteristics": {
+    "domains": [
+      "Rural",
+      "Urban"
+    ],
+    "nominal_ground_sampling_distance_m": 0.3,
+    "common_visual_conditions": [
+      "multi_scale_buildings_and_small_vehicles",
+      "urban_rural_domain_shift",
+      "cropland_orchard_forest_mixtures",
+      "bare_soil_and_harvested_fields",
+      "rivers_ponds_and_water_adjacent_roads",
+      "complex_background_shadows_and_variable_image_sharpness"
+    ],
+    "interpretation_rule": "Assess only current RGB morphology. Neither source domain nor category prevalence is evidence. Water, bare soil, empty fields and background do not acquire a fixed role by class-name mapping. No assumed NIR channel or Vaihingen reflect padding.",
+    "fixed_vocabulary_coverage_limit": "The inherited five physical roles do not explicitly encode water or bare ground; no new nodes, predicates or relations are added."
+  },
+  "class_to_physical_role": {
+    "background": null,
+    "building": "elevated_closed_rigid",
+    "road": "open_hard_surface",
+    "water": null,
+    "barren": null,
+    "forest": "elevated_porous",
+    "agriculture": "ground_vegetation",
+    "no_data": null
+  },
+  "fixed_roles": [
+    "elevated_porous",
+    "ground_vegetation",
+    "elevated_closed_rigid",
+    "open_hard_surface",
+    "small_rigid_group"
+  ],
+  "fixed_evidence": [
+    "porous_crown_texture",
+    "branching_structure",
+    "elevated_cast_shadow",
+    "continuous_fine_vegetation_texture",
+    "closed_rigid_contour",
+    "roof_surface_consistency",
+    "open_hard_surface_continuity",
+    "repeated_small_rigid_shapes"
+  ],
+  "fixed_relations": [
+    {
+      "relation_id": "R1",
+      "source_role": "elevated_porous",
+      "relation_type": "occlusion_evidence",
+      "target_role": "ground_vegetation"
+    },
+    {
+      "relation_id": "R2",
+      "source_role": "elevated_porous",
+      "relation_type": "occlusion_evidence",
+      "target_role": "open_hard_surface"
+    },
+    {
+      "relation_id": "R3",
+      "source_role": "elevated_closed_rigid",
+      "relation_type": "interrupts_continuity",
+      "target_role": "open_hard_surface"
+    },
+    {
+      "relation_id": "R4",
+      "source_role": "small_rigid_group",
+      "relation_type": "projected_on",
+      "target_role": "open_hard_surface"
+    }
+  ],
+  "role_evidence_incidence": {
+    "elevated_porous": [
+      "porous_crown_texture",
+      "branching_structure",
+      "elevated_cast_shadow"
+    ],
+    "ground_vegetation": [
+      "continuous_fine_vegetation_texture"
+    ],
+    "elevated_closed_rigid": [
+      "elevated_cast_shadow",
+      "closed_rigid_contour",
+      "roof_surface_consistency"
+    ],
+    "open_hard_surface": [
+      "open_hard_surface_continuity"
+    ],
+    "small_rigid_group": [
+      "repeated_small_rigid_shapes"
+    ]
+  },
+  "allowed_values": {
+    "presence": [
+      "absent",
+      "present",
+      "unknown"
+    ],
+    "organization": [
+      "clustered",
+      "continuous",
+      "fragmented",
+      "isolated",
+      "not_applicable",
+      "repeated",
+      "scattered",
+      "unknown"
+    ],
+    "visibility_or_observability": [
+      "clear",
+      "not_applicable",
+      "partial",
+      "poor"
+    ],
+    "evidence_state": [
+      "absent",
+      "not_applicable",
+      "present",
+      "unknown"
+    ],
+    "relation_state": [
+      "not_applicable",
+      "not_observed",
+      "observed",
+      "unknown"
+    ],
+    "quality_flag": [
+      "mild",
+      "none",
+      "strong"
+    ],
+    "graph_status": [
+      "no_reliable_evidence",
+      "partial",
+      "usable"
+    ]
+  },
+  "model_input_exclusions": [
+    "meta",
+    "audit_only"
+  ],
+  "class_mapping_qualification": "Reference only, never label access: forest needs visible crowns/branches; agriculture needs visible low fine vegetation, not bare/flooded fields or orchard crowns. Vehicles have no dedicated LoveDA land-cover label but small_rigid_group may be present only when current RGB supports it."
+}

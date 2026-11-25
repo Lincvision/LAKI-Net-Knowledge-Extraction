@@ -1,0 +1,17 @@
+{
+  "Potsdam": {
+    "Test": 504,
+    "Train": 648,
+    "Val": 216
+  },
+  "Vaihingen": {
+    "Test": 113,
+    "Train": 73,
+    "Val": 24
+  },
+  "LoveDA": {
+    "Test": 220,
+    "Train": 770,
+    "Val": 110
+  }
+}

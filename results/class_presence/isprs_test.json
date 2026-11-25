@@ -1,0 +1,107 @@
+{
+  "Potsdam": {
+    "images": 504,
+    "positive": 1824,
+    "unmatched": 10,
+    "by_role": {
+      "open_hard_surface": [
+        1,
+        498
+      ],
+      "elevated_closed_rigid": [
+        8,
+        446
+      ],
+      "ground_vegetation": [
+        0,
+        406
+      ],
+      "elevated_porous": [
+        1,
+        474
+      ]
+    },
+    "flags": [
+      {
+        "image_id": "Urban/top_potsdam_4_14_r01_c04",
+        "role": "elevated_closed_rigid",
+        "class_id": 2
+      },
+      {
+        "image_id": "Urban/top_potsdam_4_14_r01_c05",
+        "role": "elevated_closed_rigid",
+        "class_id": 2
+      },
+      {
+        "image_id": "Urban/top_potsdam_5_13_r04_c04",
+        "role": "elevated_closed_rigid",
+        "class_id": 2
+      },
+      {
+        "image_id": "Urban/top_potsdam_5_13_r05_c03",
+        "role": "elevated_closed_rigid",
+        "class_id": 2
+      },
+      {
+        "image_id": "Urban/top_potsdam_5_13_r05_c04",
+        "role": "elevated_closed_rigid",
+        "class_id": 2
+      },
+      {
+        "image_id": "Urban/top_potsdam_5_14_r01_c05",
+        "role": "elevated_closed_rigid",
+        "class_id": 2
+      },
+      {
+        "image_id": "Urban/top_potsdam_5_14_r05_c02",
+        "role": "open_hard_surface",
+        "class_id": 1
+      },
+      {
+        "image_id": "Urban/top_potsdam_6_13_r00_c03",
+        "role": "elevated_closed_rigid",
+        "class_id": 2
+      },
+      {
+        "image_id": "Urban/top_potsdam_6_13_r05_c03",
+        "role": "elevated_porous",
+        "class_id": 4
+      },
+      {
+        "image_id": "Urban/top_potsdam_7_13_r05_c05",
+        "role": "elevated_closed_rigid",
+        "class_id": 2
+      }
+    ]
+  },
+  "Vaihingen": {
+    "images": 113,
+    "positive": 444,
+    "unmatched": 1,
+    "by_role": {
+      "open_hard_surface": [
+        0,
+        112
+      ],
+      "elevated_closed_rigid": [
+        0,
+        112
+      ],
+      "ground_vegetation": [
+        0,
+        108
+      ],
+      "elevated_porous": [
+        1,
+        112
+      ]
+    },
+    "flags": [
+      {
+        "image_id": "Urban/top_vaihingen_27_r03_c01",
+        "role": "elevated_porous",
+        "class_id": 4
+      }
+    ]
+  }
+}

@@ -1,0 +1,83 @@
+[
+  {
+    "dataset": "Potsdam",
+    "split": "Test",
+    "id": "Urban/top_potsdam_2_13_r00_c00",
+    "source_sha256": "df7e4c290aa067d4f42934a798e05ed39f5f36af2ef6adba9e50922a06e90368",
+    "acting_model": "gpt-5.6-sol",
+    "write_time_utc": "2026-09-04T09:40:19.205Z",
+    "check": "All six decoded payload fields match the record used for segmentation."
+  },
+  {
+    "dataset": "Potsdam",
+    "split": "Test",
+    "id": "Urban/top_potsdam_2_13_r00_c01",
+    "source_sha256": "62e2ac11873ff69bc503e336404ba59965c65023c21129fe789896845e529681",
+    "acting_model": "gpt-5.6-sol",
+    "write_time_utc": "2026-09-04T09:41:32.119Z",
+    "check": "All six decoded payload fields match the record used for segmentation."
+  },
+  {
+    "dataset": "Potsdam",
+    "split": "Test",
+    "id": "Urban/top_potsdam_2_13_r00_c02",
+    "source_sha256": "e79d2a3ae2c3e994e7c91934af858dbd404fcc14e1cbc9894d68ed67607bd51e",
+    "acting_model": "gpt-5.6-sol",
+    "write_time_utc": "2026-09-04T09:41:56.536Z",
+    "check": "All six decoded payload fields match the record used for segmentation."
+  },
+  {
+    "dataset": "Vaihingen",
+    "split": "Val",
+    "id": "Urban/top_vaihingen_15_r00_c00",
+    "source_sha256": "68fa2564bc9f4000ab6e983a590f90bf45d51b7c62ff60062acecc121728370a",
+    "acting_model": "gpt-5.6-sol",
+    "write_time_utc": "2026-09-07T13:51:00.533Z",
+    "check": "All six decoded payload fields match the record used for segmentation."
+  },
+  {
+    "dataset": "Vaihingen",
+    "split": "Val",
+    "id": "Urban/top_vaihingen_15_r00_c01",
+    "source_sha256": "000eb1acf5fe38059c73b1b7e5742c150cd81a2e587627317186fa0d21022b77",
+    "acting_model": "gpt-5.6-sol",
+    "write_time_utc": "2026-09-07T13:51:43.457Z",
+    "check": "All six decoded payload fields match the record used for segmentation."
+  },
+  {
+    "dataset": "Vaihingen",
+    "split": "Val",
+    "id": "Urban/top_vaihingen_15_r01_c00",
+    "source_sha256": "e4ecb11ba112253be735527ddefc5fd7f32df307e7c3b717287ad738a1dc8377",
+    "acting_model": "gpt-5.6-sol",
+    "write_time_utc": "2026-09-07T13:55:28.998Z",
+    "check": "All six decoded payload fields match the record used for segmentation."
+  },
+  {
+    "dataset": "LoveDA",
+    "split": "Train",
+    "id": "Rural/470",
+    "source_sha256": "e4b548a6b5320d0f02f4eb85c8771f2f147f40adea7c0becdbf9b851d9af647b",
+    "acting_model": "gpt-6-astra",
+    "write_time_utc": "2026-09-13T06:04:59.309Z",
+    "check": "All six decoded payload fields match the record used for segmentation."
+  },
+  {
+    "dataset": "LoveDA",
+    "split": "Train",
+    "id": "Rural/473",
+    "source_sha256": "5883cac7bf224786cd10b094b7be494d3509036b045c9a586b154a1c1957d30d",
+    "acting_model": "gpt-6-astra",
+    "write_time_utc": "2026-09-13T06:06:39.541Z",
+    "check": "All six decoded payload fields match the record used for segmentation."
+  },
+  {
+    "dataset": "LoveDA",
+    "split": "Train",
+    "id": "Rural/476",
+    "source_sha256": "36aa9a0517ace8163b3693ebaed491a41fd5df4834b782d579032e7dc058495f",
+    "acting_model": "gpt-6-astra",
+    "write_time_utc": "2026-09-13T06:13:56.648Z",
+    "check": "All six decoded payload fields match the record used for segmentation."
+  }
+]

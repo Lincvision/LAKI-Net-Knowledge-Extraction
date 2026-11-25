@@ -1,0 +1,154 @@
+{
+  "schema_version": "vaihingen_cpeg_v1",
+  "dataset": "Vaihingen_RSP",
+  "extraction_protocol": {
+    "modality": "IRRG_only",
+    "channel_semantics": [
+      "NIR",
+      "R",
+      "G"
+    ],
+    "display_interpretation": "false_color_nir_rendered_as_red",
+    "input_unit": "one_original_1024x1024_patch",
+    "mask_viewed": false,
+    "multi_image_mosaic": false,
+    "free_form_graph_generation": false,
+    "exact_counts": false,
+    "coordinates": false,
+    "annotation_rule": "fixed_roles_fixed_evidence_fixed_relations_with_abstention"
+  },
+  "dataset_characteristics": {
+    "urban_form": "compact_urban_and_industrial_mixture",
+    "common_visual_conditions": [
+      "pitched_roofs_and_dense_building_blocks",
+      "narrow_streets_and_courtyards",
+      "tree_building_occlusion",
+      "strong_cast_shadows",
+      "large_roofs_parking_areas_and_vehicle_groups",
+      "reflect_padding_near_bottom_or_right_patch_boundaries"
+    ],
+    "interpretation_rule": "NIR response may support vegetation presence but never alone determines elevation or tree-versus-low-vegetation role"
+  },
+  "class_to_physical_role": {
+    "Impervious surface": "open_hard_surface",
+    "Building": "elevated_closed_rigid",
+    "Low vegetation": "ground_vegetation",
+    "Tree": "elevated_porous",
+    "Car": "small_rigid_group",
+    "Clutter/background": null,
+    "ignore boundary/padding": null
+  },
+  "fixed_roles": [
+    "elevated_porous",
+    "ground_vegetation",
+    "elevated_closed_rigid",
+    "open_hard_surface",
+    "small_rigid_group"
+  ],
+  "fixed_evidence": [
+    "porous_crown_texture",
+    "branching_structure",
+    "elevated_cast_shadow",
+    "continuous_fine_vegetation_texture",
+    "closed_rigid_contour",
+    "roof_surface_consistency",
+    "open_hard_surface_continuity",
+    "repeated_small_rigid_shapes"
+  ],
+  "fixed_relations": [
+    {
+      "relation_id": "R1",
+      "source_role": "elevated_porous",
+      "relation_type": "occlusion_evidence",
+      "target_role": "ground_vegetation"
+    },
+    {
+      "relation_id": "R2",
+      "source_role": "elevated_porous",
+      "relation_type": "occlusion_evidence",
+      "target_role": "open_hard_surface"
+    },
+    {
+      "relation_id": "R3",
+      "source_role": "elevated_closed_rigid",
+      "relation_type": "interrupts_continuity",
+      "target_role": "open_hard_surface"
+    },
+    {
+      "relation_id": "R4",
+      "source_role": "small_rigid_group",
+      "relation_type": "projected_on",
+      "target_role": "open_hard_surface"
+    }
+  ],
+  "role_evidence_incidence": {
+    "elevated_porous": [
+      "porous_crown_texture",
+      "branching_structure",
+      "elevated_cast_shadow"
+    ],
+    "ground_vegetation": [
+      "continuous_fine_vegetation_texture"
+    ],
+    "elevated_closed_rigid": [
+      "elevated_cast_shadow",
+      "closed_rigid_contour",
+      "roof_surface_consistency"
+    ],
+    "open_hard_surface": [
+      "open_hard_surface_continuity"
+    ],
+    "small_rigid_group": [
+      "repeated_small_rigid_shapes"
+    ]
+  },
+  "allowed_values": {
+    "presence": [
+      "absent",
+      "present",
+      "unknown"
+    ],
+    "organization": [
+      "clustered",
+      "continuous",
+      "fragmented",
+      "isolated",
+      "not_applicable",
+      "repeated",
+      "scattered",
+      "unknown"
+    ],
+    "visibility_or_observability": [
+      "clear",
+      "not_applicable",
+      "partial",
+      "poor"
+    ],
+    "evidence_state": [
+      "absent",
+      "not_applicable",
+      "present",
+      "unknown"
+    ],
+    "relation_state": [
+      "not_applicable",
+      "not_observed",
+      "observed",
+      "unknown"
+    ],
+    "quality_flag": [
+      "mild",
+      "none",
+      "strong"
+    ],
+    "graph_status": [
+      "no_reliable_evidence",
+      "partial",
+      "usable"
+    ]
+  },
+  "model_input_exclusions": [
+    "meta",
+    "audit_only"
+  ]
+}

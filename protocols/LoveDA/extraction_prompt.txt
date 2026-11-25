@@ -1,0 +1,59 @@
+Extract structured physical observations from one LoveDA natural-color RGB remote sensing image at a time.
+
+The inputs are CURRENT_IMAGE and IMAGE_ID. Inspect only the original 1024 x 1024 RGB image specified by CURRENT_IMAGE. Preserve its RGB channels. Do not assemble a mosaic or inspect labels.
+
+LoveDA interpretation rules
+1. Interpret the image as natural-color RGB. The NIR–red–green false-color interpretation used for Vaihingen does not apply. Vegetation color is a supporting cue. Color alone cannot establish the presence or elevation of vegetation or distinguish trees from grass.
+2. Ignore Rural/Urban identifiers, numeric filenames, dataset splits, previously viewed images, neighboring images and class frequencies when interpreting the image. Rural/Urban identity belongs only in meta and must be excluded from semantic fields supplied to the model.
+3. Woodland, orchards and cropland may be intermingled. Tree crowns or branches support elevated_porous. Fine-textured vegetation close to the ground supports ground_vegetation. Bare soil, plowed fields, harvested fields and flooded fields do not qualify as vegetation solely because they are agricultural land.
+4. Water, barren land, background and no-data regions have no additional physical roles in this protocol. Do not assign water or bare soil to open_hard_surface. This role requires visible continuity of paving or a hard road surface across open ground. Gray color, smoothness or a strip-like shape alone cannot distinguish water, soil, roofs and ground surfaces.
+5. At a ground sampling distance of approximately 0.3 m, small objects may be difficult to identify. small_rigid_group requires at least two visibly separate small rigid objects of similar size. Exclude groups of houses, rooftop fixtures, field ridges, tree rows, reflective noise, repeated textures and mirrored duplicates when identifying vehicle groups.
+6. Use contours, texture, continuity, cast shadows and direct occlusion evidence to distinguish roofs from ground, plastic-covered structures from bright bare soil, tree crowns from crops, and tree shadows from dark water. When the distinction is unclear, use unknown, partial or poor in the appropriate field.
+7. Do not assume that Vaihingen-style reflection padding was used. Set the relevant quality flag only when the current image shows boundary truncation or orthophoto distortion.
+8. The five roles cover only part of the seven-class land-cover vocabulary so that they remain compatible with the network. Do not invent nodes for water, bare soil or other unmapped classes. Sparse evidence or a graph_status of no_reliable_evidence is a valid, complete output.
+
+Extraction rules
+1. Do not open, read, search for or infer masks_png, masks, labels, annotations, ground truth, evaluation results or neighboring images.
+2. Do not infer the content of the current image from its filename, dataset split, geographic ID, a previously viewed image or dataset frequencies.
+3. Do not output coordinates, bounding boxes, exact counts, area fractions, pixel locations, additional roles, additional cues, additional relations or free-form scene descriptions.
+4. Adjacency alone does not establish a relation. Assign observed only when there is direct visual evidence in the current RGB image.
+5. unknown is a valid output. When the evidence is unclear, abstain. Do not fill gaps with general knowledge.
+6. Return exactly the five roles, eight evidence cues and four relations R1–R4 specified in the protocol. Preserve the key names, relation endpoints and relation types.
+7. Return only valid JSON. Omit Markdown, explanations and reasoning.
+
+Fixed physical roles
+- elevated_porous: A structure that appears elevated and shows a porous canopy or branching pattern, typically a tree. Green appearance or a shadow alone is insufficient evidence for this role.
+- ground_vegetation: Fine-textured vegetation close to the ground that forms a continuous or locally continuous surface, typically low vegetation.
+- elevated_closed_rigid: An elevated rigid structure with a largely closed outline and an internally consistent surface, typically a building.
+- open_hard_surface: A continuous hard surface extending across open ground, typically a road, walkway or paved area. Exclude roofs.
+- small_rigid_group: At least two separate, compact, small rigid objects of similar size, typically a group of vehicles. Exclude repeated rooftop fixtures and features duplicated by reflection padding.
+
+Fixed visual cues
+- porous_crown_texture: A porous, fine-grained texture organized into a recognizable crown.
+- branching_structure: An identifiable trunk, branches or a forked canopy framework.
+- elevated_cast_shadow: A coherent cast shadow attributable to an elevated structure. Exclude dark areas of uncertain origin.
+- continuous_fine_vegetation_texture: A continuous, fine-grained vegetation texture close to the ground.
+- closed_rigid_contour: A largely closed outline around a rigid region.
+- roof_surface_consistency: A consistent roof plane, tiling pattern or roof construction feature within a region.
+- open_hard_surface_continuity: A hard ground surface that extends continuously across open space.
+- repeated_small_rigid_shapes: At least two small rigid objects of similar size and shape. Exclude repeated rooftop fixtures and reflections caused by boundary padding.
+
+Fixed relations
+- R1 elevated_porous --occlusion_evidence--> ground_vegetation
+- R2 elevated_porous --occlusion_evidence--> open_hard_surface
+- R3 elevated_closed_rigid --interrupts_continuity--> open_hard_surface
+- R4 small_rigid_group --projected_on--> open_hard_surface
+
+Consistency rules
+- If elevated_porous=present, at least one of porous_crown_texture and branching_structure must be present. elevated_cast_shadow alone is insufficient.
+- If ground_vegetation=present, continuous_fine_vegetation_texture must be present.
+- If elevated_closed_rigid=present, at least one of closed_rigid_contour and roof_surface_consistency must be present.
+- If open_hard_surface=present, open_hard_surface_continuity must be present.
+- If small_rigid_group=present, repeated_small_rigid_shapes must be present.
+- If either relation endpoint is absent, set the relation's state=not_applicable and observability=not_applicable.
+- If neither endpoint is absent and at least one is unknown, set the relation's state=unknown.
+- Both observed and not_observed require both endpoints to be present. Co-occurrence alone does not justify observed.
+- If an evidence cue has state=not_applicable, its observability must be not_applicable.
+- If a role has presence=absent, its organization must be not_applicable.
+
+Use protocol_snapshot.json and annotation_payload.schema.json in this directory as the sole specifications for allowed values, required fields and relation signatures. Before returning the JSON, check its syntax, enum values and consistency with the rules above. Omit the validation steps from the response.

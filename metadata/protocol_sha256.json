@@ -1,0 +1,14 @@
+{
+  "protocols/Potsdam/extraction_prompt.txt": "915e78c9d176fafb42a88dcb62eb05aae1e687bcca6cf343aae41884857b4a0a",
+  "protocols/Potsdam/extraction_prompt.zh.txt": "b4c5dcc72b263fc8705dad777c8e984fee0443358a1b1a50c730b779ea349961",
+  "protocols/Potsdam/protocol_snapshot.json": "92e5ca26c379cb8962a58f7507a67f7211ba6f40dc071dc622c37986560397e2",
+  "protocols/Potsdam/annotation_payload.schema.json": "46d85356799e2f76e6f38abceaaac3e6e372fa734eb9442f750fd8d0ac322751",
+  "protocols/Vaihingen/extraction_prompt.txt": "d0e14dae7d35daa5a5b95aa30ae6c8f1f2b22cedb60bc8cecb8207be8caf45f4",
+  "protocols/Vaihingen/extraction_prompt.zh.txt": "219ee05459cde161dcf2d79475934da32d65271bd1d8281e9424297f7f1b832d",
+  "protocols/Vaihingen/protocol_snapshot.json": "935e34563c136afda6fa50cec1f31ecfa132c19995e1409cf94d78e1f2ca7084",
+  "protocols/Vaihingen/annotation_payload.schema.json": "3eefcf6f76b152c54cb74507173f55c02b2c03a32c26e51d327338623404d21c",
+  "protocols/LoveDA/extraction_prompt.txt": "2b8fb70ebec99f6997379b350115ab0c362d3130c3603e5868d5949eaa90d77f",
+  "protocols/LoveDA/extraction_prompt.zh.txt": "572ab5c2c0a4406850368e72020f57af1dd88403ce045c2a2b563f5a391d4174",
+  "protocols/LoveDA/protocol_snapshot.json": "1223884c4b3939ad70e6f83dcfe11aa76eb89d774d0055ac4c9ef41dbbe4b84c",
+  "protocols/LoveDA/annotation_payload.schema.json": "fa058789287a1b746b4830d724f4e92f94cfa4e860dfb60025ee928648be8235"
+}
